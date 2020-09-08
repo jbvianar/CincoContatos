@@ -4,34 +4,40 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.pdm.cincocontatos.R;
+import com.pdm.cincocontatos.model.User;
 
-public class AlterarUsuario extends AppCompatActivity {
-    //FUNCIONANDO PERFEITAMENTE ATÉ INSERIR A LINHA DO getSerializable DO PICK_CONTACTS
-    boolean primeiraVezNome = true;
-    boolean primeiraVezUser = true;
-    boolean primeiraVezSenha = true;
-    boolean primeiraVezEmail = true;
+public class AlterarUsuario extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+    //boolean primeiraVezNome = true;
+   // boolean primeiraVezUser = true;
+    //boolean primeiraVezSenha = true;
+   // boolean primeiraVezEmail = true;
     TextInputEditText edUser,edPass,edNome,edEmail;
     Button btAlterar;
     Switch swLogado;
+
+    BottomNavigationView bnv;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alterar_usuario);
+
+        bnv = (BottomNavigationView) findViewById(R.id.bnv);
+        bnv.setOnNavigationItemSelectedListener(this);
+        bnv.setSelectedItemId(R.id.anvPerfil);//deixa selecionado o ícone de Perfil
         Log.v("PDMv2", "alterar");
         btAlterar = (Button) findViewById(R.id.btCriar);
         edUser = (TextInputEditText) findViewById(R.id.edT_Login2);
@@ -51,56 +57,7 @@ public class AlterarUsuario extends AppCompatActivity {
         edUser.setText(loginSalvo);
         edPass.setText(senhaSalva);
         edEmail.setText(emailSalvo);
-        /*
-        //Evento de limpar Componente
-        edUser.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (primeiraVezUser) {
-                    primeiraVezUser = false;
-                    edUser.setText("");
-                }
 
-                return false;
-            }
-        });
-        //Evento de limpar Componente
-
-        edPass.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (primeiraVezSenha) {
-                    primeiraVezSenha = false;
-                    edPass.setText("");
-                    edPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                }
-                return false;
-            }
-        });
-
-        //Evento de limpar Componente - E-mail
-        edEmail.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (primeiraVezEmail) {
-                    primeiraVezEmail = false;
-                    edEmail.setText("");
-                }
-                return false;
-            }
-        });
-
-        //Evento de limpar Componente - Nome
-        edNome.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (primeiraVezNome) {
-                    primeiraVezNome = false;
-                    edNome.setText("");
-                }
-                return false;
-            }
-        });*/
 
         btAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,26 +73,68 @@ public class AlterarUsuario extends AppCompatActivity {
 
                 SharedPreferences salvaUser = getSharedPreferences("usuarioPadrao", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor escritor = salvaUser.edit();
-
+                //Salvando as informacoes do usuario
                 escritor.putString("nome", nome);
                 escritor.putString("senha", senha);
                 escritor.putString("login", login);
-                //Salvando o E-mail
                 escritor.putString("email", email);
-                //Salvando o manterLogado
                 escritor.putBoolean("manterLogado", manterLogado);
 
-                escritor.commit(); //Salva em Disco
+                escritor.commit(); //Salva em Disco - NÃO ESQUECER
 
                 Toast.makeText(AlterarUsuario.this, "Usuário alterado com sucesso", Toast.LENGTH_LONG).show();
-                //Intent intent = new Intent(AlterarUsuario.this, ListaDeContatos_ListView.class);
-                //startActivity(intent);
-                //NÃO PASSA DAQUI POR CAUSA DA LINHA DO getSerializable DE PICK_CONTACTS
-                //Mesmo após a chamar de um startActivity o método continuará execuntando
-                //Matando a Activity atual ao passar para a Pick_Contacts
+
                 Log.v("PDMv2", "passei do StartActivity");
                 finish();//mata a tela de alterar usuário
             }
         });
+
+        //Dados da Intent anterior
+        Intent quemChamou = this.getIntent();
+        if (quemChamou != null) {
+            Bundle params = quemChamou.getExtras();
+            if (params != null) {
+                //Recuperando o Usuário
+                user = (User) params.getSerializable("usuario");
+                if (user != null) {
+                    Log.v("pdm", user.getNome());
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //checa se o Item selecionado é o de Ligar
+        if(item.getItemId() == R.id.anvLigar){
+            //Intent intent = new Intent(this, ListaDeContatos_ListView.class);
+            Toast.makeText(this, "Selecione um contato para ligar", Toast.LENGTH_LONG).show();
+            Log.v("PDMv2", "Fechar a activity Alterar Usuário");
+            finish();
+        }
+        //checa se o Item selecionado é o de Alterar Usuário - NÃO TEM FUNÇÃO NESTA ACTIVITY
+        /*if (item.getItemId() == R.id.anvPerfil) {
+            //abre a tela de Alterar Usuário
+            Toast.makeText(this, "RESET", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Você já está na tela de Alterar Usuário", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, AlterarUsuario.class);
+            intent.putExtra("usuario", user);//envia instância do user logado para a Activity filha chamada
+            //startActivity(intent);
+            Log.v("PDMv2", "Criando nova Activity Alterar Usuário - Reset");
+            startActivityForResult(intent, 1111);//abre com código 1111 (Alterar Usuário) uma Activity filha da qual se espera dados
+            Log.v("PDMv2", "Matando Activity Alterar Usuário anterior - Reset");
+            finish();
+        }*/
+        //checa se o Item selecionado é o de Definir Contatos
+        if (item.getItemId() == R.id.anvMudar) {
+            //abre a tela de Pegar os Contatos
+            Intent intent = new Intent(this, Pick_Contacts.class);
+            intent.putExtra("usuario", user);//envia instância do user logado para a Activity filha chamada
+            startActivityForResult(intent, 1112);//abre com código 1112 (Mudar Contatos) uma Activity filha da qual se espera dados
+            Log.v("PDMv2", "Matou Alterar Usuário");
+            finish();
+        }
+
+        return true;//TROCADO DE FALSE
     }
 }

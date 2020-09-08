@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context=".activities.NovoUsuario">
+    tools:context=".activities.AlterarUsuario">
 
     <TextView
         android:id="@+id/textView2"
@@ -46,16 +46,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="390dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="391dp"
+        android:layout_height="477dp"
         android:background="@color/colorArea"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bnv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
@@ -136,7 +134,7 @@
             android:id="@+id/btCriar"
             android:layout_width="270dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
             android:text="Alterar"
             android:textColor="@color/cardview_light_background"
@@ -171,4 +169,14 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorbnv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/activity_main_bottom_actions" />
 </androidx.constraintlayout.widget.ConstraintLayout>

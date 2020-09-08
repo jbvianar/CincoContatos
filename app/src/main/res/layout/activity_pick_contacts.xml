@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.Pick_Contacts">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="61dp"
         android:fontFamily="casual"
         android:text="5"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -24,9 +24,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,73 +38,31 @@
         android:fontFamily="casual"
         android:text="Contatos"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="390dp"
+        android:layout_width="395dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:background="@color/colorArea"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bnv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0">
-
-        <TextView
-            android:id="@+id/MessageIntent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Selecione os Contatos"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:onClick="onClickBuscar"
-            android:text="Buscar"
-            android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btLogar" />
-
-
-        <Button
-            android:id="@+id/btLogar"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:background="@color/colorPrimary"
-            android:text="Salvar Contatos"
-            android:textColor="@color/cardview_light_background"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/MessageIntent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
-            android:layout_width="266dp"
+            android:layout_width="260dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:background="@color/cardview_light_background"
             android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button">
+            app:layout_constraintTop_toBottomOf="@+id/btSalvar">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtBusca"
@@ -115,7 +72,67 @@
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/btBuscar"
+            android:layout_width="104dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="5dp"
+            android:onClick="onClickBuscar"
+            android:text="Buscar"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/MessageIntent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Selecione os Contatos"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/btSalvar"
+            android:layout_width="175dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="2dp"
+            android:background="@color/colorPrimary"
+            android:onClick="cliquedoSalvar"
+            android:text="Limpar Lista"
+            android:textColor="@color/cardview_light_background"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MessageIntent" />
+
+        <ListView
+            android:id="@+id/listView2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorlv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            tools:layout_editor_absoluteX="1dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorbnv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/activity_main_bottom_actions" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

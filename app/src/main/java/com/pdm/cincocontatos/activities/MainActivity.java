@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         mTextView.setPaintFlags(mTextView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         //Evento de limpar Componente
-       /* edUser.setOnTouchListener(new View.OnTouchListener() {
+       edUser.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (primeiraVezUser) {
@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        */
-
         btLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
                     if ((loginSalvo.compareTo(login) == 0) && (senhaSalva.compareTo(senha) == 0)) {
                         User user = montarObjetoUser();
                         //Abrindo a Lista de Contatos
-                        Intent intent = new Intent(MainActivity.this, ListaDeContatos_ListView.class);
-                        intent.putExtra("usuario", user);
-                        startActivity(intent);
+                      Intent intent = new Intent(MainActivity.this, ListaDeContatos_ListView.class);
+                      intent.putExtra("usuario", user);
+                       startActivity(intent);
                     } else {
                         Toast.makeText(MainActivity.this, "Login ou Senha Incorretos", Toast.LENGTH_LONG).show();
                     }

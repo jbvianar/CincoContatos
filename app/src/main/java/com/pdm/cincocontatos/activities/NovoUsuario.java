@@ -17,6 +17,7 @@ import android.widget.Switch;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.pdm.cincocontatos.R;
+import com.pdm.cincocontatos.model.User;
 
 public class NovoUsuario extends AppCompatActivity {
 
@@ -101,6 +102,9 @@ public class NovoUsuario extends AppCompatActivity {
                 email = edEmail.getText().toString();
                 manterLogado = swLogado.isChecked();
 
+                User user= new User(nome, login,senha,email);
+
+
                 SharedPreferences salvaUser = getSharedPreferences("usuarioPadrao", Activity.MODE_PRIVATE);
                 SharedPreferences.Editor escritor = salvaUser.edit();
 
@@ -116,6 +120,7 @@ public class NovoUsuario extends AppCompatActivity {
 
 
                 Intent intent = new Intent(NovoUsuario.this, Pick_Contacts.class);
+                intent.putExtra("usuario",user);
                 startActivity(intent);
 
                 //Mesmo após chamar de um startActivity, o método continuará execuntando
